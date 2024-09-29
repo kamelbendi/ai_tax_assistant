@@ -363,7 +363,7 @@ def test_mongo():
 def handle_exception(e):
     logger.exception("Wystąpił nieoczekiwany błąd.")
     flash(f"Wystąpił nieoczekiwany błąd: {str(e)}", "danger")
-    return redirect(url_for('index'))
+    return redirect(url_for('/'))
 
 # Run the Flask app
 if __name__ == '__main__':
