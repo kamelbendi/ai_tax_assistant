@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+            <h1 class="mt-5">Witamy w Asystencie Podatkowym AI</h1>
+            <p class="lead">Pomagamy w rozwiązywaniu problemów podatkowych związanych z formularzem PCC-3.</p>
+            <a href="{{ url_for('ask_ai') }}" class="btn btn-primary me-2">Rozpocznij Rozmowę</a>
+            <a href="{{ url_for('generate_pcc3') }}" class="btn btn-secondary">Generuj PCC-3</a>
+        </div>
+    </div>
+{% endblock %}

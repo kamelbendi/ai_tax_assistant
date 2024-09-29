@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="mb-4">Asystent Podatkowy AI</h2>
+
+            <!-- Language Selection at the Top -->
+            <div class="mb-4">
+                <label for="language_selection" class="form-label">Wybierz język:</label>
+                <select class="form-select w-auto d-inline-block" id="language_selection" onchange="updateLanguage(this.value)">
+                    <option value="Polish" {% if request.form.get('language') == 'Polish' %}selected{% endif %}>Polski</option>
+                    <option value="English" {% if request.form.get('language') == 'English' %}selected{% endif %}>Angielski</option>
+                    <option value="Ukrainian" {% if request.form.get('language') == 'Ukrainian' %}selected{% endif %}>Ukraiński</option>
+                </select>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header bg-secondary text-white">
+                    Rozmowa
+                </div>
+                <div class="card-body" style="max-height: 400px; overflow-y: auto;" id="conversation">
+                    {% for message in conversations %}
+                        {% if message.role == 'user' %}
+                            <div class="d-flex justify-content-end mb-2">
+                                <div class="bg-primary text-white p-2 rounded" style="max-width: 75%;">
+                                    <strong>Ty:</strong> {{ message.content }}
+                                </div>
+                            </div>
+                        {% elif message.role == 'assistant' %}
+                            <div class="d-flex justify-content-start mb-2">
+                                <div class="bg-light text-dark p-2 rounded border" style="max-width: 75%;">
+                                    <strong>AI:</strong> {{ message.content }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <form method="POST" action="{{ url_for('ask_ai') }}">
+                <div class="mb-3">
+                    <label for="question" class="form-label">Twoje Pytanie</label>
+                    <textarea class="form-control" id="question" name="question" rows="3" 
+                              placeholder="Wpisz swoje pytanie tutaj..." required></textarea>
+                </div>
+                <!-- Hidden input to pass the selected language -->
+                <input type="hidden" name="language" id="language" value="{{ request.form.get('language', 'Polish') }}">
+                <button type="submit" class="btn btn-primary">Wyślij</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateLanguage(selectedLanguage) {
+            document.getElementById('language').value = selectedLanguage;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h2 class="mb-4">Conversation Details</h2>
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <strong>User:</strong> {{ conversation.user_message }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>AI:</strong> {{ conversation.assistant_message }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    Timestamp: {{ conversation.timestamp }}
+                </div>
+            </div>
+            <a href="{{ url_for('ask_ai') }}" class="btn btn-secondary">Back to AI Assistant</a>
+        </div>
+    </div>
+{% endblock %}
+

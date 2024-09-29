@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Add New AI Prompt</h2>
+    <form method="POST" action="{{ url_for('add_new_prompt') }}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Prompt Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter prompt name" required>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Prompt Content</label>
+            <textarea class="form-control" id="content" name="content" rows="5" placeholder="Enter prompt content" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Prompt</button>
+    </form>
+{% endblock %}
